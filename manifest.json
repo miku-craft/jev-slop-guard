@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "name": "Slop Guard",
+  "version": "0.1.0",
+  "description": "구글 검색 결과에 AI slop 확률을 표시하고, 외부 링크를 열 때 80% 이상이면 경고합니다. 판정은 Jev가 합니다.",
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.google.com/search*",
+        "https://www.google.co.kr/search*"
+      ],
+      "js": [
+        "serp.js"
+      ]
+    }
+  ],
+  "options_page": "options.html"
+}
